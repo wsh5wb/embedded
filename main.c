@@ -74,8 +74,9 @@ int main(void)
 	InitializeUART();
 	InitializeLimitSwitches();
 
-	//moveToOrigin(); //return to Origin
+	moveToOrigin(); //return to Origin
 	//moveTo(20,30);
+	//highlightWord(0,0,20,20);
 	//UARTSendByte(0x64);
 	while(1){
 	    //UARTSendByte(0x64);

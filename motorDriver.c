@@ -84,7 +84,7 @@ void moveTo(unsigned int x, unsigned int y){
 void highlightWord(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
     moveTo(x1,y1);
     TurnOffSolenoid();
-    moveTo(x2,y2);
+    bresenham(x1, y1, x2, y2);//moveTo(x2,y2);
     PowerSolenoid();
     UARTSendByte(0xFF);
 }
@@ -119,6 +119,41 @@ void setYMotorBackward(void){
     M2_STEP_SET_LOW;
     M2_STEP_SET_HIGH;
     M2_STEP_SET_LOW;
+}
+
+void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
+    int dx = x2 - x1, dy = y2 - y1;
+    int sx = 1, sy = 1;
+    int err = dx - dy;
+    int e2;
+
+    if (dx < 0){
+        dx *= 1;
+        sx = -1;
+    }
+
+    if (dy < 0){
+        dy *= 1;
+        sx = -1;
+    }
+
+    for(;;){
+        if (x1==x2 && y1 == y2)     break;
+
+        e2 = 2*err;
+
+        if( e2 > -1 *dx){
+            err -= dy;
+            x1 += sx;
+        }
+
+        if (e2 < dy){
+            err += dx;
+            y1 += sy;
+        }
+        moveTo(x1, y1);
+    }
+
 }
 
 __attribute__((interrupt(TIMER0_A0_VECTOR)))
