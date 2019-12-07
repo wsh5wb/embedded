@@ -18,7 +18,7 @@ void InitializeGoButtonPortPin(void){
 __attribute__((interrupt(PORT1_VECTOR)))
 void GoButtonISR(void){
     butcount++;
-    TOGGLE_SOL;
+    //TOGGLE_SOL;
     if(!System_Active){
         System_Active = 1;
         SET_LED_HIGH;

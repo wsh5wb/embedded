@@ -1,7 +1,7 @@
 #include "UART.h"
 
 extern int Word_Ready;
-extern int x1,x2,y1,y2;
+extern int wordX1,wordX2,wordY1,wordY2;
 
 void InitializeUART(){
     UCA0CTLW0 |= UCSWRST; //Set UCSWRST to one -- enables software reset
@@ -60,21 +60,21 @@ void RxISR(void){
 
     switch(count){
     case 0:
-        x1 = receivedByte;
+        wordX1 = receivedByte;
         count++;
         break;
     case 1:
-        x2 = receivedByte;
+        wordY1 = receivedByte;
         count++;
         break;
     case 2:
-        y1 = receivedByte;
+        wordX2 = receivedByte;
         count++;
         break;
     case 3:
-        y2 = receivedByte;
+        wordY2 = receivedByte;
         count = 0;
-        //Word_Ready = 1;
+        Word_Ready = 1;
         UARTSendByte(0xFF);
         break;
 

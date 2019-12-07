@@ -4,7 +4,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.MSP430FR2476.ccxml.TI MSP430 USB1/MSP430" value="${build_artifact:Capstone2}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.MSP430FR2476.ccxml.TI MSP430 USB1/MSP430" value="Capstone2"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:Capstone2}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.MSP430FR2476.ccxml.TI MSP430 USB1/MSP430" value="D:/Documents\School\4th Year\Capstone\embedded\Debug\Capstone2.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.MSP430FR2476.ccxml.TI MSP430 USB1/MSP430" value="C:/Users\student\Desktop\Wade\Capstone2\Debug\Capstone2.out"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/Capstone2"/>
 </listAttribute>

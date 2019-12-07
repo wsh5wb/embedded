@@ -1,10 +1,10 @@
 #include "motorDriver.h"
 #include "UART.h"
 
-unsigned int xPt = 0;
-unsigned int yPt = 0;
-unsigned int xDest = 0;
-unsigned int yDest = 0;
+extern unsigned int xPt;
+extern unsigned int yPt;
+extern unsigned int xDest;
+extern unsigned int yDest;
 int xDir = 1; // 1 for forward, -1 for back
 int yDir = 1;
 int m1Step = 0; // 0 - low, 1 - high
@@ -82,9 +82,15 @@ void moveTo(unsigned int x, unsigned int y){
 }
 
 void highlightWord(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
-    moveTo(x1,y1);
+    moveTo(x1<<2,y1<<2);
     TurnOffSolenoid();
-    bresenham(x1, y1, x2, y2);//moveTo(x2,y2);
+    /*if(x1 == x2 || y1 == y2){
+        moveTo(x2<<2,y2<<2);
+    }else{
+        bresenham(x1<<2, y1<<2, x2<<2, y2<<4);//moveTo(x2,y2);
+    }*/
+    bresenham(x1<<2, y1<<2, x2<<2, y2<<2);//moveTo(x2,y2);
+
     PowerSolenoid();
     UARTSendByte(0xFF);
 }
@@ -174,7 +180,7 @@ void A0ISR(void){
     if(m1Step == 0){ //transition from low to high is a step
         xCount++;
         m1Step = 1;
-        if(xCount == 20){
+        if(xCount == 5){
             xCount = 0;
             xPt += xDir;
         }
@@ -201,7 +207,7 @@ void A1ISR(void){
     if(m2Step == 0){ //transition from low to high is a step
         yCount++;
         m2Step = 1;
-        if(yCount == 20){
+        if(yCount == 5){
             yCount = 0;
             yPt += yDir;
         }

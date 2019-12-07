@@ -13,7 +13,8 @@
 //Global Variable
 int System_Active = 0; // 0-OFF, 1-ON
 int Word_Ready = 0;
-unsigned int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+unsigned int xPt = 0, yPt = 0, xDest = 0, yDest = 0;
+unsigned int wordX1 = 0, wordY1 = 0, wordX2 = 0, wordY2 = 0;
 
 void moveToOrigin(void){
     PowerSolenoid();
@@ -24,15 +25,18 @@ void moveToOrigin(void){
     //check that the motors match the limit switch
     while(readLS1()){
         M1_STEP_SET_LOW;
-        delay(10500); //10500
+        delay(2500); //10500
         M1_STEP_SET_HIGH;
-        delay(10500);
-    }while(readLS2()){
-        M2_STEP_SET_LOW;
-        delay(10500);
-        M2_STEP_SET_HIGH;
-        delay(10500);
+        delay(2500);
     }
+    xPt = 0;
+    while(readLS2()){
+        M2_STEP_SET_LOW;
+        delay(2500);
+        M2_STEP_SET_HIGH;
+        delay(2500);
+    }
+    yPt = 0;
 
     M1_ENABLE_HIGH;
     M2_ENABLE_HIGH;
@@ -70,15 +74,24 @@ int main(void)
 	InitializeLEDPortPin();
 	InitializeGoButtonPortPin();
 	InitializeMotorDriver();
+	InitializeLimitSwitches();
 	InitializeSolenoid();
 	InitializeUART();
-	InitializeLimitSwitches();
+
 
 	moveToOrigin(); //return to Origin
-	//moveTo(20,30);
-	//highlightWord(0,0,20,20);
+	//PowerSolenoid();
+	//moveTo(400,0);
+	highlightWord(0,0,15,16);
+	//moveToOrigin();
 	//UARTSendByte(0x64);
 	while(1){
+	    /*if(!readLS1()){
+	        TurnLEDOff();
+	    }
+	    if(!readLS2()){
+	        TurnLEDOn();
+	    }*/
 	    //UARTSendByte(0x64);
 	    //UARTSendByte(0xff);
 
@@ -88,7 +101,7 @@ int main(void)
 	        while(System_Active){
 	            if(Word_Ready == 1){
 	                Word_Ready = 0;
-	                highlightWord(x1,y1,x2,y2);
+	                highlightWord(wordX1,wordY1,wordX2,wordY2);
 	            }
 	        }
 	        moveToOrigin();
