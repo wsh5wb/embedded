@@ -83,7 +83,7 @@ void moveTo(unsigned int x, unsigned int y){
 
 void highlightWord(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
     moveTo(x1<<2,y1<<2);
-    TurnOffSolenoid();
+    //TurnOffSolenoid();
     /*if(x1 == x2 || y1 == y2){
         moveTo(x2<<2,y2<<2);
     }else{
@@ -91,7 +91,7 @@ void highlightWord(unsigned int x1, unsigned int y1, unsigned int x2, unsigned i
     }*/
     bresenham(x1<<2, y1<<2, x2<<2, y2<<2);//moveTo(x2,y2);
 
-    PowerSolenoid();
+    //PowerSolenoid();
     UARTSendByte(0xFF);
 }
 
@@ -127,6 +127,8 @@ void setYMotorBackward(void){
     M2_STEP_SET_LOW;
 }
 
+//.224cm per integer coordinate (.0882 in)
+//X is back-forth : Y is left-right
 void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
     int dx = x2 - x1, dy = y2 - y1;
     int sx = 1, sy = 1;

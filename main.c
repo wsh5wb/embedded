@@ -78,14 +78,24 @@ int main(void)
 	InitializeSolenoid();
 	InitializeUART();
 
-
-	moveToOrigin(); //return to Origin
-	//PowerSolenoid();
-	//moveTo(400,0);
-	highlightWord(0,0,15,16);
-	//moveToOrigin();
 	//UARTSendByte(0x64);
+	//PowerSolenoid();
+    moveToOrigin();
+    //go 11 inches up
+    highlightWord(0,0,125,0);
+    //go 8.5 inches down
+    moveToOrigin();
+    highlightWord(0,0,0,96);
+    //go to corner
+    moveToOrigin();
+    highlightWord(0,0,125,96);
+	//TurnOffSolenoid();
+    //moveTo(100,0);
+    PowerSolenoid();
 	while(1){
+	    /*PowerSolenoid();
+	    moveToOrigin();
+	    highlightWord(0,0,30,30);*/
 	    /*if(!readLS1()){
 	        TurnLEDOff();
 	    }
