@@ -82,16 +82,17 @@ void moveTo(unsigned int x, unsigned int y){
 }
 
 void highlightWord(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
-    moveTo(x1<<2,y1<<2);
-    //TurnOffSolenoid();
+    PowerSolenoid();
+    bresenham(xPt,yPt,x1<<2,y1<<2);
+    //moveTo(x1<<2,y1<<2);
+    TurnOffSolenoid();
     /*if(x1 == x2 || y1 == y2){
         moveTo(x2<<2,y2<<2);
     }else{
-        bresenham(x1<<2, y1<<2, x2<<2, y2<<4);//moveTo(x2,y2);
+        bresenham(x1<<2, y1<<2, x2<<2, y2<<2);//moveTo(x2,y2);
     }*/
     bresenham(x1<<2, y1<<2, x2<<2, y2<<2);//moveTo(x2,y2);
-
-    //PowerSolenoid();
+    PowerSolenoid();
     UARTSendByte(0xFF);
 }
 
@@ -132,18 +133,19 @@ void setYMotorBackward(void){
 void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
     int dx = x2 - x1, dy = y2 - y1;
     int sx = 1, sy = 1;
-    int err = dx - dy;
     int e2;
 
     if (dx < 0){
-        dx *= 1;
+        dx *= -1;
         sx = -1;
     }
 
     if (dy < 0){
-        dy *= 1;
-        sx = -1;
+        dy *= -1;
+        sy = -1;
     }
+
+    int err = dx - dy;
 
     for(;;){
         if (x1==x2 && y1 == y2)     break;

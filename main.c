@@ -81,16 +81,24 @@ int main(void)
 	//UARTSendByte(0x64);
 	//PowerSolenoid();
     moveToOrigin();
-    //go 11 inches up
+    /*//go 11 inches up
     highlightWord(0,0,125,0);
     //go 8.5 inches down
     moveToOrigin();
     highlightWord(0,0,0,96);
     //go to corner
     moveToOrigin();
-    highlightWord(0,0,125,96);
+    highlightWord(0,0,125,96);*/
+    //highlightWord(0,10,22,32);
+    //highlightWord(41,51,22,32);
+
+    highlightWord(14,35,34,55);
+    highlightWord(57,75,34,55);
+    //highlightWord(51,51,30,32);
+    //highlightWord(10,10,30,32);
 	//TurnOffSolenoid();
     //moveTo(100,0);
+
     PowerSolenoid();
 	while(1){
 	    /*PowerSolenoid();
