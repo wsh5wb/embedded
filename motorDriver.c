@@ -132,21 +132,22 @@ void setYMotorBackward(void){
 void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2){
     int dx = x2 - x1, dy = y2 - y1;
     int sx = 1, sy = 1;
-    int err = dx - dy;
     int e2;
 
     if (dx < 0){
-        dx *= 1;
+        dx *= -1;
         sx = -1;
     }
 
     if (dy < 0){
-        dy *= 1;
-        sx = -1;
+        dy *= -1;
+        sy = -1;
     }
 
+    int err = dx - dy;
+
     for(;;){
-        if (x1==x2 && y1 == y2)     break;
+        if (x1==x2 && y1==y2)     break;
 
         e2 = 2*err;
 
@@ -159,7 +160,7 @@ void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y
             err += dx;
             y1 += sy;
         }
-        moveTo(x1, y1);
+        moveTo(x1,y1);
     }
 
 }
