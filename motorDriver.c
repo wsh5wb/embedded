@@ -148,7 +148,7 @@ void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y
     int err = dx - dy;
 
     for(;;){
-        if (x1==x2 && y1 == y2)     break;
+        if (x1==x2 && y1==y2)     break;
 
         e2 = 2*err;
 
@@ -161,7 +161,7 @@ void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y
             err += dx;
             y1 += sy;
         }
-        moveTo(x1, y1);
+        moveTo(x1,y1);
     }
 
 }
