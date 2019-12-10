@@ -85,7 +85,9 @@ void highlightWord(unsigned int x1, unsigned int y1, unsigned int x2, unsigned i
     PowerSolenoid();
     bresenham(xPt,yPt,x1<<2,y1<<2);
     //moveTo(x1<<2,y1<<2);
-    TurnOffSolenoid();
+
+    //TurnOffSolenoid();
+
     /*if(x1 == x2 || y1 == y2){
         moveTo(x2<<2,y2<<2);
     }else{
@@ -168,7 +170,7 @@ void bresenham(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y
 
 __attribute__((interrupt(TIMER0_A0_VECTOR)))
 void A0ISR(void){
-    if(xPt == xDest){
+    if(xPt == xDest || xPt == X_MAX){
         M1_STEP_SET_LOW;
         M1_ENABLE_HIGH;
         M1_RESET_SET_LOW;
@@ -184,7 +186,7 @@ void A0ISR(void){
     if(m1Step == 0){ //transition from low to high is a step
         xCount++;
         m1Step = 1;
-        if(xCount == 5){
+        if(xCount == STEPS_PER_POINT){
             xCount = 0;
             xPt += xDir;
         }
@@ -196,7 +198,7 @@ void A0ISR(void){
 
 __attribute__((interrupt(TIMER1_A0_VECTOR)))
 void A1ISR(void){
-    if(yPt == yDest){
+    if(yPt == yDest || yPt == Y_MAX){
         M2_STEP_SET_LOW;
         M2_ENABLE_HIGH;
         M2_RESET_SET_LOW;
@@ -211,7 +213,7 @@ void A1ISR(void){
     if(m2Step == 0){ //transition from low to high is a step
         yCount++;
         m2Step = 1;
-        if(yCount == 5){
+        if(yCount == STEPS_PER_POINT){
             yCount = 0;
             yPt += yDir;
         }

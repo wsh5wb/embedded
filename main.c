@@ -81,6 +81,9 @@ int main(void)
 	//UARTSendByte(0x64);
 	//PowerSolenoid();
     moveToOrigin();
+    //highlightWord(0,0,27,13);
+    //highlightWord(0,0,10,0);
+
     /*//go 11 inches up
     highlightWord(0,0,125,0);
     //go 8.5 inches down
@@ -91,16 +94,23 @@ int main(void)
     highlightWord(0,0,125,96);*/
     //highlightWord(0,10,22,32);
     //highlightWord(41,51,22,32);
-
-    highlightWord(14,35,34,55);
-    highlightWord(57,75,34,55);
+/*
+    highlightWord(7,17,15,25);
+    highlightWord(30,30,20,20);
+    highlightWord(40,51,50,61);
+    highlightWord(25,37,15,25);
+*/
     //highlightWord(51,51,30,32);
     //highlightWord(10,10,30,32);
 	//TurnOffSolenoid();
     //moveTo(100,0);
 
-    PowerSolenoid();
+    //PowerSolenoid();
 	while(1){
+	    if(Word_Ready == 1){
+	        Word_Ready = 0;
+	        highlightWord(wordX1,wordY1,wordX2,wordY2);
+	    }
 	    /*PowerSolenoid();
 	    moveToOrigin();
 	    highlightWord(0,0,30,30);*/

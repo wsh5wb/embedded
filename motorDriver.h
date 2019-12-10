@@ -5,8 +5,9 @@
 #include "solenoid.h"
 #include "TimerA.h"
 
-#define X_MAX 254
-#define Y_MAX 254
+#define X_MAX 500
+#define Y_MAX 500
+#define STEPS_PER_POINT 10
 
 // X-Direction
 //-----------------Motor 1---------------------------------------------------
