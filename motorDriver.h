@@ -5,9 +5,9 @@
 #include "solenoid.h"
 #include "TimerA.h"
 
-#define X_MAX 500
-#define Y_MAX 500
-#define STEPS_PER_POINT 10
+#define X_MAX 550
+#define Y_MAX 550
+#define STEPS_PER_POINT 9 //Number of motor microsteps needed for one step on our coordinate plane
 
 // X-Direction
 //-----------------Motor 1---------------------------------------------------
@@ -87,9 +87,11 @@
 
 //Prototypes
 void InitializeMotorDriver(void);
+void InitializeMotorDriverPinDirections(void);
+void InitializeMotorDriverPinValues(void);
 void moveTo(unsigned int x, unsigned int y);
-void moveToX(int x);
-void moveToY(int y);
+void moveToX(unsigned int x);
+void moveToY(unsigned int y);
 void highlightWord(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2); //Maybe a boolean
 void setXMotorForward(void);
 void setYMotorForward(void);

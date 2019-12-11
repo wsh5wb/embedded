@@ -4,9 +4,12 @@
 #include "solenoid.h"
 
 extern int System_Active;
-int butcount = 0;
 
-// Prototypes
+/* InitializeGoButtonPortPin
+ * Parameters - None
+ * Return - None
+ * Algorithm - Configures the go button port pin to an input and initializes the interrupt
+ */
 void InitializeGoButtonPortPin(void){
     // Configure port pin for pushbutton
     SET_GO_AS_INPUT;
@@ -15,11 +18,15 @@ void InitializeGoButtonPortPin(void){
     P1IFG &= ~GO_BIT;
 }
 
-__attribute__((interrupt(PORT1_VECTOR)))
+/* GoButtonISR
+ * Parameters - None
+ * Return - None
+ * Algorithm - Runs when the go button is pressed. Sets the system active, turns the LED on, alerts the Jetson
+ */
+#pragma vector = PORT1_VECTOR
+__interrupt
 void GoButtonISR(void){
-    butcount++;
-    //TOGGLE_SOL;
-    if(!System_Active){
+    if(System_Active == 0){
         System_Active = 1;
         SET_LED_HIGH;
         UARTSendByte(0xFF);
